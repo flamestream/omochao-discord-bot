@@ -1,5 +1,6 @@
 import discord
 import asyncio
+from boto.s3.connection import S3Connection
 
 client = discord.Client()
 
@@ -12,7 +13,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content == "ping":
+    if message.content == "ping?":
         await client.send_message(message.channel, "pong-chao!")
 
-client.run('epB55MRnsxcUTD2kVwiNROC7zZUKZsp5')
+client.run(os.environ['DISCORD_TOKEN'])
