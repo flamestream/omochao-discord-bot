@@ -1,5 +1,5 @@
 import command
-from client.discord import Client
+from client.cli import Client
 
 client = Client()
 command.set_client(client)

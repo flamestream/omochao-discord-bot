@@ -1,23 +1,32 @@
+import os
+
+whitelist = ['artist', 'animator', 'writer', 'gamer']
+
 async def execute(self, message, arg):
 
-	whitelist = ['artist', 'animator', 'writer', 'gamer']
 	user = message.author
-	out = '%s ' % user.mention
 
 	if not arg.lower() in whitelist:
-		self.client.add_reaction(message, '\u26A0')
-		await self.client.send_message(message.channel, out + "I can only handle the following roles-chao: %s" % ', '.join('`%s`' % v for v in whitelist))
-		await self.client.add_reaction(message, '\u26A0')
+		await self.client.reply(message, 'I can only handle the following roles-chao: %s' % ', '.join('`%s`' % v for v in whitelist))
+		await self.client.add_reaction_warn(message)
 		return
 
-	target_role = next(r for r in message.server.roles if r.name.lower() == arg.lower())
+	target_role = None
+	matching_roles = [r for r in message.server.roles if r.name.lower() == arg.lower()]
+	if len(matching_roles) >= 1:
+		target_role = matching_roles[0]
+
 	if target_role is None:
-		await self.client.send_message(message.channel, out)
-		out += 'I could not find role `%s`-chao...' % arg
-		await self.client.add_reaction(message, '\u26A0')
+		await self.client.reply(message, 'I could not find role `%s`-chao...' % arg)
+		await self.client.add_reaction_warn(message)
 	else:
 		await self.client.add_roles(user, target_role)
-		await self.client.add_reaction(message, '\u2705')
-		return
+		await self.client.add_reaction_ack(message)
 
-	await self.client.send_message(message.channel, out)
+help_message = '''Grants a role to yourself.
+You may have multiple roles assigned to yourself.
+Only one role can be granted per command.
+I can only grant the following roles: %s
+
+Example usage:
+    -chao %s %s''' %  (', '.join(whitelist), os.path.splitext(os.path.basename(__file__))[0], whitelist[0])
