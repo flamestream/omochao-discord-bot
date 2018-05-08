@@ -27,7 +27,7 @@ async def execute(self, message, arg):
 		await self.client.add_reaction_warn(message)
 	else:
 		roll = random.randint(minimum, maximum)
-		await self.client.reply(message, 'Rolled {0} ({1}-{2})'.format(roll, minimum, maximum))
+		await self.client.reply(message, 'rolled {0} ({1}-{2})'.format(roll, minimum, maximum))
 		await self.client.add_reaction_ack(message)
 
 help_message = '''Rolls a dice. The default is 1-100.
