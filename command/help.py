@@ -32,6 +32,9 @@ To run a command:
 
 For more information about a specific command:
     -chao help [command name]
+
+Fix me at:
+    https://github.com/flamestream/omochao-discord-bot
 ```''' % (command_list_str)
 	return out
 

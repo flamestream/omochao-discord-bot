@@ -1,6 +1,6 @@
 import os
 
-whitelist = ['artist', 'animator', 'writer', 'gamer', 'roleplayer', 'voice actor']
+whitelist = ['artist', 'animator', 'writer', 'gamer', 'roleplayer', 'voice actor', 'programmer']
 
 async def execute(self, message, arg):
 
